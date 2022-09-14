@@ -1,0 +1,115 @@
+<%# ヘッダー %>
+<%= render "shared/header" %>
+
+<%# メイン %>
+<div class="main">
+  <div class="detail">
+    <div class="detail_title">HOGEHOGE BEER</div>
+    <div class="detail_images">
+      <div class="detail_image"> <img src="/images/beer_glass.png"> </div>
+      <div class="detail_image"> <img src="/images/beer_glass.png"> </div>
+      <div class="detail_image"> <img src="/images/beer_glass.png"> </div>
+    </div>
+    <div class="detail_charts">
+      <div class="detail_chart"> <canvas id="looksChart"></canvas>  </div>
+      <div class="detail_chart"> <canvas id="aromaChart"></canvas>  </div>
+      <div class="detail_chart"> <canvas id="flavorChart"></canvas> </div>
+    </div>
+    <div class="detail_table">
+      <table>
+        <tr> <th class="table_item">Brewery</th> <td class="table_data"><%= @brewery_info %></td> </tr>
+        <tr> <th class="table_item">Beer style</th> <td class="table_data"><%= @beer_style %></td> </tr>
+        <tr> <th class="table_item">SRM</th> <td class="table_data"><%= @srm %></td> </tr>
+        <tr> <th class="table_item">IBU</th> <td class="table_data"><%= @ibu %></td> </tr>
+        <tr> <th class="table_item">ABV</th> <td class="table_data"><%= @abv %>%</td> </tr>
+      </table>
+    </div>
+    <div class="detail_comment"><%= @comment %></div>
+    <div class="detail_buttons">
+      <div class="detail_button"><%= link_to 'Edit', '#' %></div>
+      <div class="detail_button"><%= link_to 'Delete', '#' %></div>
+    </div>
+  </div>
+
+  <script>
+    // 定数
+    const type_looks  = 0;
+    const type_aroma  = 1;
+    const type_flavor = 2;
+    // 外観
+    const looks_label  = '外観';
+    const looks_labels = ['透明度', '色', '泡立ち'];
+    const looks_data   = [<%= @looks_data[0] %>, <%= @looks_data[1] %>, <%= @looks_data[2] %>];
+    const looksChart  = new Chart(
+      document.getElementById('looksChart'),
+      set_rader_chart_config(looks_label, looks_labels, looks_data, type_looks)
+    );
+    // アロマ
+    const aroma_label  = 'アロマ';
+    const aroma_labels = ['モルト', 'ホップ', 'エステル', 'フルーティー', 'その他'];
+    const aroma_data   = [<%= @aroma_data[0] %>, <%= @aroma_data[1] %>, <%= @aroma_data[2] %>, <%= @aroma_data[3] %>, <%= @aroma_data[4] %>];
+    const aromaChart = new Chart(
+      document.getElementById('aromaChart'),
+      set_rader_chart_config(aroma_label, aroma_labels, aroma_data, type_aroma)
+    );
+    // フレーバー
+    const flavor_label  = 'フレーバー';
+    const flavor_labels = ['ボディ', '苦味', 'モルト', 'ホップ', 'その他'];
+    const flavor_data   = [<%= @flavor_data[0] %>, <%= @flavor_data[1] %>, <%= @flavor_data[2] %>, <%= @flavor_data[3] %>, <%= @flavor_data[4] %>];
+    const flavorChart  = new Chart(
+      document.getElementById('flavorChart'),
+      set_rader_chart_config(flavor_label, flavor_labels, flavor_data, type_flavor)
+    );
+
+    // チャートデータ作成
+    function set_rader_chart_config(chart_label, chart_labels, chart_data, chart_type) {
+      const chart_color = [
+        [ 60, 179, 113], // 外観
+        [255,  99, 132], // アロマの色
+        [ 65, 105, 225]  // フレーバー
+      ];
+
+      // データ
+      const data = {
+        labels: chart_labels,
+        datasets: [{
+          label: chart_label,
+          data: chart_data,
+          fill: true,
+          backgroundColor: `rgba(${chart_color[chart_type][0]}, ${chart_color[chart_type][1]}, ${chart_color[chart_type][2]}, 0.2)`,
+          borderColor: `rgb(${chart_color[chart_type][0]}, ${chart_color[chart_type][1]}, ${chart_color[chart_type][2]})`,
+          pointBackgroundColor: `rgb(${chart_color[chart_type][0]}, ${chart_color[chart_type][1]}, ${chart_color[chart_type][2]})`,
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: `rgb(${chart_color[chart_type][0]}, ${chart_color[chart_type][1]}, ${chart_color[chart_type][2]})`
+        }]
+      };
+      // 設定
+      const config = {
+        type: 'radar',
+        data: data,
+        options: {
+          elements: {
+            line: {
+              borderWidth: 3
+            }
+          },
+          scale: {
+            ticks: {
+              min: 0,
+              max: 3,
+              stepSize: 1
+            },
+            suggestedMax: 3,
+            suggestedMin:0
+          }
+        }
+      };
+
+      return config;
+    }
+  </script>
+</div>
+
+<%# フッター %>
+<%= render "shared/footer" %>

@@ -1,0 +1,66 @@
+<%# ヘッダー %>
+<%= render "shared/header" %>
+
+<%# メイン %>
+<div class="main">
+  <%#div class="title">All notes</div%>
+
+  <%# テイスティングノート一覧 %>
+  <div class="thumbnails">
+    <div class="thumbnails_block">
+
+      <%# サムネイル %>
+      <%= link_to "/notes/1" do %>
+        <div class="thumbnail">
+          <%# サムネイル: 画像 %>
+          <div class="thumbnail_img"> <img src="images/beer_glass.png"> </div>
+          <%# サムネイル: 説明 %>
+          <div class="thumbnail_text">
+            <div class="thumbnail_text_top"> <p class="thumbnail_name">HOGEHOGE BEER</p> </div>
+            <div class="thumbnail_text_bottom">
+              <p class="thumbnail_style">Westcoast IPA</p>
+              <p class="thumbnail_date">2022.09.14</p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%# サムネイル %>
+      <%= link_to "/notes/2" do %>
+        <div class="thumbnail">
+          <%# サムネイル: 画像 %>
+          <div class="thumbnail_img"> <img src="images/beer_glass.png"> </div>
+          <%# サムネイル: 説明 %>
+          <div class="thumbnail_text">
+            <div class="thumbnail_text_top"> <p class="thumbnail_name">FUMUFUMU BEER</p> </div>
+            <div class="thumbnail_text_bottom">
+              <p class="thumbnail_style">Pilsner</p>
+              <p class="thumbnail_date">2022.07.07</p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%# サムネイル %>
+      <%= link_to "/notes/3" do %>
+        <div class="thumbnail">
+          <%# サムネイル: 画像 %>
+          <div class="thumbnail_img"> <img src="images/beer_glass.png"> </div>
+          <%# サムネイル: 説明 %>
+          <div class="thumbnail_text">
+            <div class="thumbnail_text_top"> <p class="thumbnail_name">FUGAFUGA BEER by hogehogehogehoge</p> </div>
+            <div class="thumbnail_text_bottom">
+              <p class="thumbnail_style">Belgian White</p>
+              <p class="thumbnail_date">2022.08.01</p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      
+    </div>
+  </div>
+  
+</div>
+
+<%# フッター %>
+<%= render "shared/footer" %>

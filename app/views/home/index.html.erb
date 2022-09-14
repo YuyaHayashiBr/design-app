@@ -3,7 +3,18 @@
 
 <%# メイン %>
 <div class="main">
-  
+  <% rows = 0 %>
+  <% @bubbles.each do |bubbles_row| %>
+    <% if rows == 3 %>
+      <div class="top_message">あなたのビールの思い出を残しましょう。</div>
+    <% end %>
+    <div class="bubbles">
+      <% bubbles_row.each do |bubble| %>
+        <div class="bubble<%=bubble%>"></div>
+      <% end %>
+    </div>
+    <% rows += 1 %>
+  <% end %>
 </div>
 
 <%# フッター %>

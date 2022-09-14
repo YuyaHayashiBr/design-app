@@ -1,17 +1,22 @@
 <header>
   <div class="logo">
-    <a href="#">Remem<span class="logo-beer">BEER</span>(仮)</a>
+    <a href="/">Remem<span class="logo-beer">BEER</span></a>
   </div>
   <div class="right-nav">
 
     <ul class="menu">
-      <li><a href="#">ログイン</a></li>
-      <li><a href="#">新規登録</a></li>
+      <%# TODO: ログイン状態で表示を変更する %>
+      <%# ログイン状態 %>
+        <li class="user_name">（’・ω・｀）さん</li>
+        <li><%= link_to 'ログアウト', '#' %></li>
+      <%# ログアウト状態 %>
+        <li><%= link_to 'ログイン', '#' %></li>
+        <li><%= link_to '新規登録', '#' %></li>
+      <%# ここまで %>
       <li class="test"><a href="#" class="ddmenu"><i class="fa-solid fa-bars"></i></a>
         <ul>
-          <li><a href="#">投稿一覧</a></li>
-          <li><a href="#">blank</a></li>
-          <li><a href="#">blank</a></li>
+          <li><%= link_to '思い出一覧', notes_path %></li>
+          <li><%= link_to '思い出す', '#' %></li>
         </ul>
       </li>
     </ul>
