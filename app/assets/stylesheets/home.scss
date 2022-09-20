@@ -94,6 +94,10 @@ ul.menu {
     list-style-type: none;  /* ★2:リストの先頭記号を消す */
     &.user_name {
       margin-right: 10px;
+      font-size: 20px;
+      span {
+        font-size: 12px;
+      }
     }
   }
   a {
@@ -163,6 +167,9 @@ ul.menu li.test:hover ul {
   color: gray;
   font-weight: bold;
   font-size: 36px;
+
+  animation: fadeIn 3s ease 0s 1 normal;
+  -webkit-animation: fadeIn 2s ease 0s 1 normal;
 }
 .bubbles {
   display: flex;
@@ -170,6 +177,18 @@ ul.menu li.test:hover ul {
   align-items:flex-start;
   height:  100px;
   width:  100%;
+
+  animation: fadeIn 3s ease 0s 1 normal;
+  -webkit-animation: fadeIn 2s ease 0s 1 normal;
+}
+@keyframes fadeIn {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0}
+    100% {opacity: 1}
 }
 .bubble3 {
   height: 50px;
@@ -222,7 +241,7 @@ ul.menu li.test:hover ul {
   margin: 20px 0px 0px 0px;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: center;//space-between;
   align-items: center;
 }
 .thumbnail {
@@ -236,6 +255,7 @@ ul.menu li.test:hover ul {
   justify-content: space-between;
 
   padding: 5px 8px 5px 8px;
+  margin:  0px 10px 0px 10px;
 
   border-radius: 3px;
   box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.7);
@@ -320,8 +340,8 @@ ul.menu li.test:hover ul {
     .detail_image {
       border: solid gray 0.5px;
       img {
-        height: 200px;
-        width: 200px;
+        height: 250px;
+        width: 250px;
       }
     }
   }
@@ -336,8 +356,8 @@ ul.menu li.test:hover ul {
 
     .detail_chart {
       border: solid gray 0.5px;
-      height: 200px;
-      width: 200px;
+      height: 250px;
+      width: 250px;
     }
   }
 }
@@ -361,7 +381,7 @@ ul.menu li.test:hover ul {
   }
   th.table_item {
     height: 35px;
-    width: 268px;
+    width: 280px;
     background-color: #E0E0E0;
     text-align: center;
     font-weight: bold;
@@ -369,7 +389,7 @@ ul.menu li.test:hover ul {
   }
   td.table_data {
     height: 35px;
-    width: 465px;
+    width: 500px;
     background-color: #F5F5F5;
     //padding: 0px 5px 5px 0px;
     text-align: center;
@@ -408,6 +428,18 @@ ul.menu li.test:hover ul {
 }
 
 
+/***************************************************************
+ * テイスティングノート[投稿]
+ ***************************************************************/
+ .create {
+  width: 800px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.7);
+
+  padding: 10px 10px 10px 10px;
+  margin:  20px  0px 20px  0px;
+ }
 
 
 

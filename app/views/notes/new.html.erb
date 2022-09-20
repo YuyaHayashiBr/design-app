@@ -1,0 +1,80 @@
+<%# ヘッダー %>
+<%= render "shared/header" %>
+
+<%# メイン %>
+<div class="main">
+  <div class="create">
+
+    <%= form_with model: @note, url: notes_path, local: true do |f| %>
+
+      <%# エラーメッセージ %>
+      <%= render 'shared/error_messages', model: f.object %>
+
+      <%# 画像(複数指定) %>
+      <div class="#">画像</div>
+      <div>
+        <%= f.label :images, '画像' %>
+        <%= f.file_field :images, multiple: true %>
+      </div>
+
+      <div class="#">ビール名</div>
+      <%= f.text_field :name,    class:"#", id:"note-name", placeholder:"ビール名（40文字まで)", maxlength:"40" %>
+      <div class="#">ブルワリー</div>
+      <%= f.text_field :brewery, class:"#", id:"note-name", placeholder:"ブルワリー名（40文字まで)", maxlength:"40" %>
+      <div class="#">ビアスタイル</div>
+      <%= f.text_field :beer_style, class:"#", id:"note-name", placeholder:"ビアスタイル（40文字まで)", maxlength:"40" %>
+      <div class="#">SRM</div>
+      <%= f.text_field :srm,     class:"#", id:"note-name", placeholder:"SRM（数値)", maxlength:"40" %>
+      <div class="#">IBU</div>
+      <%= f.text_field :ibu,     class:"#", id:"note-name", placeholder:"IBU（数値)", maxlength:"40" %>
+      <div class="#">ABV</div>
+      <%= f.text_field :abv,     class:"#", id:"note-name", placeholder:"アルコール度数[%]", maxlength:"40" %>
+
+
+      <div class="#" style="font-weight: bold">外観</div>
+      <div class="#">透明度</div>
+      <%= f.collection_select(:looks_clear_id, LooksClear.all, :id, :name, {}, {class:"#", id:"looks-clear"}) %>
+      <div class="#">色</div>
+      <%= f.collection_select(:looks_color_id, LooksColor.all, :id, :name, {}, {class:"#", id:"looks-color"}) %>
+      <div class="#">泡立ち</div>
+      <%= f.collection_select(:looks_foam_id,  LooksFoam.all,  :id, :name, {}, {class:"#", id:"looks-foam"}) %>
+
+      <div class="#" style="font-weight: bold">アロマ</div>
+      <div class="#">モルト</div>
+      <%= f.collection_select(:aroma_malt_id,  AromaMalt.all,  :id, :name, {}, {class:"#", id:"aroma-malt"}) %>
+      <div class="#">ホップ</div>
+      <%= f.collection_select(:aroma_hop_id,   AromaHop.all,   :id, :name, {}, {class:"#", id:"aroma-hop"}) %>
+      <div class="#">エステル</div>
+      <%= f.collection_select(:aroma_ester_id, AromaEster.all, :id, :name, {}, {class:"#", id:"aroma-ester"}) %>
+      <div class="#">フルーティー</div>
+      <%= f.collection_select(:aroma_fruit_id, AromaFruit.all, :id, :name, {}, {class:"#", id:"aroma-fruit"}) %>
+      <div class="#">その他</div>
+      <%= f.collection_select(:aroma_other_id, AromaOther.all, :id, :name, {}, {class:"#", id:"aroma-other"}) %>
+
+      <div class="#" style="font-weight: bold">フレーバー</div>
+      <div class="#">ボディ</div>
+      <%= f.collection_select(:flavor_body_id, FlavorBody.all, :id, :name, {}, {class:"#", id:"flavor-body"}) %>
+      <div class="#">カーボネーション</div>
+      <%# Level.all %>
+      <%= f.collection_select(:flavor_carbonation_id,  FlavorCarbonation.all, :id, :name, {}, {class:"#", id:"flavor-carbonation"}) %>
+      <div class="#">モルトの甘み</div>
+      <%# Level.all %>
+      <%= f.collection_select(:flavor_malt_id,  FlavorMalt.all, :id, :name, {}, {class:"#", id:"flavor-malt"}) %>
+      <div class="#">ホップの苦味</div>
+      <%# Level.all %>
+      <%= f.collection_select(:flavor_hop_id,   FlavorHop.all, :id, :name, {}, {class:"#", id:"flavor-hop"}) %>
+      <div class="#">その他</div>
+      <%# Level.all %>
+      <%= f.collection_select(:flavor_other_id, FlavorOther.all, :id, :name, {}, {class:"#", id:"flavor-other"}) %>
+
+      <div class="#">メモ(備考)</div>
+      <%= f.text_area :memo, class:"#", id:"note-memo", placeholder:"メモ（1,000文字まで）", rows:"7", maxlength:"1000" %>
+
+      <%= f.submit "思い出に残す", class:"#" %>
+    <% end %>
+
+  </div>
+</div>
+
+<%# フッター %>
+<%= render "shared/footer" %>

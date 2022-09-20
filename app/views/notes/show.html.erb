@@ -4,11 +4,32 @@
 <%# メイン %>
 <div class="main">
   <div class="detail">
-    <div class="detail_title">HOGEHOGE BEER</div>
+    <div class="detail_title"><%= @note.name %></div>
     <div class="detail_images">
-      <div class="detail_image"> <img src="/images/beer_glass.png"> </div>
-      <div class="detail_image"> <img src="/images/beer_glass.png"> </div>
-      <div class="detail_image"> <img src="/images/beer_glass.png"> </div>
+      <%# 画像1枚目 %>
+      <div class="detail_image">
+        <% if @note.images[0] != nil %>
+          <%= image_tag @note.images[0] %>
+        <% else %>
+          <%= image_tag "/images/blank.png" %>
+        <% end %>
+      </div>
+      <%# 画像2枚目 %>
+      <div class="detail_image">
+        <% if @note.images[1] != nil %>
+          <%= image_tag @note.images[1] %>
+        <% else %>
+          <%= image_tag "/images/blank.png" %>
+        <% end %>
+      </div>
+      <%# 画像3枚目 %>
+      <div class="detail_image">
+        <% if @note.images[2] != nil %>
+          <%= image_tag @note.images[2] %>
+        <% else %>
+          <%= image_tag "/images/blank.png" %>
+        <% end %>
+      </div>
     </div>
     <div class="detail_charts">
       <div class="detail_chart"> <canvas id="looksChart"></canvas>  </div>
@@ -17,17 +38,83 @@
     </div>
     <div class="detail_table">
       <table>
-        <tr> <th class="table_item">Brewery</th> <td class="table_data"><%= @brewery_info %></td> </tr>
-        <tr> <th class="table_item">Beer style</th> <td class="table_data"><%= @beer_style %></td> </tr>
-        <tr> <th class="table_item">SRM</th> <td class="table_data"><%= @srm %></td> </tr>
-        <tr> <th class="table_item">IBU</th> <td class="table_data"><%= @ibu %></td> </tr>
-        <tr> <th class="table_item">ABV</th> <td class="table_data"><%= @abv %>%</td> </tr>
+        <%#####################################################
+          # ブルワリー
+          ##################################################### %>
+        <tr>
+          <th class="table_item">ブルワリー</th>
+          <td class="table_data">
+            <% if @note.brewery != nil%>
+              <%= @note.brewery %>
+            <% else %>
+              未登録
+            <% end %>
+          </td>
+        </tr>
+        <%#####################################################
+          # ビアスタイル
+          ##################################################### %>
+        <tr>
+          <th class="table_item">ビアスタイル</th>
+          <td class="table_data">
+            <% if @note.beer_style != nil%>
+              <%= @note.beer_style %>
+            <% else %>
+              未登録
+            <% end %>
+          </td>
+        </tr>
+        <%#####################################################
+          # SRM
+          ##################################################### %>
+        <tr>
+          <th class="table_item">SRM</th>
+          <td class="table_data">
+            <% if @note.srm != nil %>
+              <%= @note.srm %>
+            <% else %>
+              未登録
+            <% end %>
+          </td>
+        </tr>
+        <%#####################################################
+          # IBU
+          ##################################################### %>
+        <tr>
+          <th class="table_item">IBU</th>
+          <td class="table_data">
+            <% if @note.ibu != nil %>
+              <%= @note.ibu %>
+            <% else %>
+              未登録
+            <% end %>
+          </td>
+        </tr>
+        <%#####################################################
+          # ABV
+          ##################################################### %>
+        <tr>
+          <th class="table_item">ABV</th>
+          <td class="table_data">
+            <% if @note.abv != nil %>
+              <%= @note.abv %> %
+            <% else %>
+              未登録
+            <% end %>
+          </td>
+        </tr>
       </table>
     </div>
-    <div class="detail_comment"><%= @comment %></div>
+    <%#####################################################
+      # メモ
+      ##################################################### %>
+    <div class="detail_comment"><%= @note.memo %></div>
+    <%#####################################################
+      # 編集/削除 ボタン
+      ##################################################### %>
     <div class="detail_buttons">
       <div class="detail_button"><%= link_to 'Edit', '#' %></div>
-      <div class="detail_button"><%= link_to 'Delete', '#' %></div>
+      <div class="detail_button"><%= link_to 'Delete', note_path(@note), method: :delete %></div>
     </div>
   </div>
 
@@ -39,24 +126,24 @@
     // 外観
     const looks_label  = '外観';
     const looks_labels = ['透明度', '色', '泡立ち'];
-    const looks_data   = [<%= @looks_data[0] %>, <%= @looks_data[1] %>, <%= @looks_data[2] %>];
-    const looksChart  = new Chart(
+    const looks_data   = [<%= @note.looks_clear_id %>, <%= @note.looks_color_id %>, <%= @note.looks_foam_id %>];
+    const looksChart   = new Chart(
       document.getElementById('looksChart'),
       set_rader_chart_config(looks_label, looks_labels, looks_data, type_looks)
     );
     // アロマ
     const aroma_label  = 'アロマ';
     const aroma_labels = ['モルト', 'ホップ', 'エステル', 'フルーティー', 'その他'];
-    const aroma_data   = [<%= @aroma_data[0] %>, <%= @aroma_data[1] %>, <%= @aroma_data[2] %>, <%= @aroma_data[3] %>, <%= @aroma_data[4] %>];
-    const aromaChart = new Chart(
+    const aroma_data   = [<%= @note.aroma_malt_id %>, <%= @note.aroma_hop_id %>, <%= @note.aroma_ester_id %>, <%= @note.aroma_fruit_id %>, <%= @note.aroma_other_id %>];
+    const aromaChart   = new Chart(
       document.getElementById('aromaChart'),
       set_rader_chart_config(aroma_label, aroma_labels, aroma_data, type_aroma)
     );
     // フレーバー
     const flavor_label  = 'フレーバー';
-    const flavor_labels = ['ボディ', '苦味', 'モルト', 'ホップ', 'その他'];
-    const flavor_data   = [<%= @flavor_data[0] %>, <%= @flavor_data[1] %>, <%= @flavor_data[2] %>, <%= @flavor_data[3] %>, <%= @flavor_data[4] %>];
-    const flavorChart  = new Chart(
+    const flavor_labels = ['ボディ', 'カーボネーション', 'モルトの甘味', 'ホップの苦味', 'その他'];
+    const flavor_data   = [<%= @note.flavor_body_id %>, <%= @note.flavor_carbonation_id %>, <%= @note.flavor_malt_id %>, <%= @note.flavor_hop_id %>, <%= @note.flavor_other_id %>];
+    const flavorChart   = new Chart(
       document.getElementById('flavorChart'),
       set_rader_chart_config(flavor_label, flavor_labels, flavor_data, type_flavor)
     );

@@ -6,16 +6,17 @@
 
     <ul class="menu">
       <%# TODO: ログイン状態で表示を変更する %>
-      <%# ログイン状態 %>
-        <li class="user_name">（’・ω・｀）さん</li>
-        <li><%= link_to 'ログアウト', '#' %></li>
-      <%# ログアウト状態 %>
-        <li><%= link_to 'ログイン', '#' %></li>
-        <li><%= link_to '新規登録', '#' %></li>
-      <%# ここまで %>
+      <% if user_signed_in? %>
+        <li class="user_name"><%= current_user.nickname %><span> さん</span></li>
+        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'ログイン', new_user_session_path %></li>
+        <li><%= link_to '新規登録', new_user_registration_path %></li>
+      <% end %>
       <li class="test"><a href="#" class="ddmenu"><i class="fa-solid fa-bars"></i></a>
         <ul>
           <li><%= link_to '思い出一覧', notes_path %></li>
+          <li><%= link_to '思い出を残す', new_note_path %></li>
           <li><%= link_to '思い出す', '#' %></li>
         </ul>
       </li>

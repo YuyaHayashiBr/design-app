@@ -3,61 +3,43 @@
 
 <%# メイン %>
 <div class="main">
-  <%#div class="title">All notes</div%>
+  <div class="title"><%= current_user.nickname %> さんの思い出</div>
 
   <%# テイスティングノート一覧 %>
   <div class="thumbnails">
-    <div class="thumbnails_block">
 
-      <%# サムネイル %>
-      <%= link_to "/notes/1" do %>
-        <div class="thumbnail">
-          <%# サムネイル: 画像 %>
-          <div class="thumbnail_img"> <img src="images/beer_glass.png"> </div>
-          <%# サムネイル: 説明 %>
-          <div class="thumbnail_text">
-            <div class="thumbnail_text_top"> <p class="thumbnail_name">HOGEHOGE BEER</p> </div>
-            <div class="thumbnail_text_bottom">
-              <p class="thumbnail_style">Westcoast IPA</p>
-              <p class="thumbnail_date">2022.09.14</p>
+      <% @notes.each_with_index do |note, index| %>
+        <% if index % 3 == 0 %>
+          <div class="thumbnails_block">
+        <% end %>
+
+        <%# サムネイル %>
+        <%= link_to note_path(note) do %>
+          <div class="thumbnail">
+            <%# サムネイル: 画像 %>
+            <div class="thumbnail_img">
+              <% if note.images[0] != nil %>
+                <%= image_tag note.images[0] %>
+              <% else %>
+                <%= image_tag "/images/blank.png" %>
+              <% end %>
+            </div>
+            <%# サムネイル: 説明 %>
+            <div class="thumbnail_text">
+              <div class="thumbnail_text_top"> <p class="thumbnail_name"><%= note.name %></p> </div>
+              <div class="thumbnail_text_bottom">
+                <p class="thumbnail_style"><%= note.beer_style %></p>
+                <p class="thumbnail_date"><%= note.created_at.strftime('%Y.%m.%d')  %></p>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
 
-      <%# サムネイル %>
-      <%= link_to "/notes/2" do %>
-        <div class="thumbnail">
-          <%# サムネイル: 画像 %>
-          <div class="thumbnail_img"> <img src="images/beer_glass.png"> </div>
-          <%# サムネイル: 説明 %>
-          <div class="thumbnail_text">
-            <div class="thumbnail_text_top"> <p class="thumbnail_name">FUMUFUMU BEER</p> </div>
-            <div class="thumbnail_text_bottom">
-              <p class="thumbnail_style">Pilsner</p>
-              <p class="thumbnail_date">2022.07.07</p>
-            </div>
+        <% if index % 3 == 2 %>
           </div>
-        </div>
-      <% end %>
-
-      <%# サムネイル %>
-      <%= link_to "/notes/3" do %>
-        <div class="thumbnail">
-          <%# サムネイル: 画像 %>
-          <div class="thumbnail_img"> <img src="images/beer_glass.png"> </div>
-          <%# サムネイル: 説明 %>
-          <div class="thumbnail_text">
-            <div class="thumbnail_text_top"> <p class="thumbnail_name">FUGAFUGA BEER by hogehogehogehoge</p> </div>
-            <div class="thumbnail_text_bottom">
-              <p class="thumbnail_style">Belgian White</p>
-              <p class="thumbnail_date">2022.08.01</p>
-            </div>
-          </div>
-        </div>
+        <% end %>
       <% end %>
       
-    </div>
   </div>
   
 </div>
