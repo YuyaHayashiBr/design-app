@@ -3,6 +3,8 @@
 
 <%# メイン %>
 <div class="main">
+  <div class="title">思い出を残す</div>
+
   <div class="create">
 
     <%= form_with model: @note, url: notes_path, id: "new_note", local: true do |f| %>
@@ -10,9 +12,11 @@
       <%# エラーメッセージ %>
       <%= render 'shared/error_messages', model: f.object %>
 
-      <%# 画像(複数指定) %>
+      <%#####################################################
+        # 画像(複数指定)
+        ##################################################### %>
       <div class="edit-block">
-        <div class="edit-title">ビールの写真(3枚まで)</div>
+        <div class="edit-title">写真(3枚まで)</div>
         <div class="edit-img-forms">
 
           <%# 画像選択フォーム %>
@@ -33,61 +37,98 @@
         </div>
       </div>
 
-      <div class="#">ビール名</div>
-      <%= f.text_field :name,    class:"#", id:"note-name", placeholder:"ビール名（40文字まで)", maxlength:"40" %>
-      <div class="#">ブルワリー</div>
-      <%= f.text_field :brewery, class:"#", id:"note-name", placeholder:"ブルワリー名（40文字まで)", maxlength:"40" %>
-      <div class="#">ビアスタイル</div>
-      <%= f.text_field :beer_style, class:"#", id:"note-name", placeholder:"ビアスタイル（40文字まで)", maxlength:"40" %>
-      <div class="#">SRM</div>
-      <%= f.text_field :srm,     class:"#", id:"note-name", placeholder:"SRM（数値)", maxlength:"40" %>
-      <div class="#">IBU</div>
-      <%= f.text_field :ibu,     class:"#", id:"note-name", placeholder:"IBU（数値)", maxlength:"40" %>
-      <div class="#">ABV</div>
-      <%= f.text_field :abv,     class:"#", id:"note-name", placeholder:"アルコール度数[%]", maxlength:"40" %>
-
+      <%#####################################################
+        # 概要
+        ##################################################### %>
+      <div class="edit-block">
+        <div class="edit-title">概要</div>
+        <div class="edit-summary">
+          <div>
+            <div class="edit-summary-title">ビール名</div>
+            <%= f.text_field :name, class:"edit-summary-text-field", id:"note-name", placeholder:"ビールの銘柄、商品名など", maxlength:"50" %>
+          </div>
+          <div>
+            <div class="edit-summary-title">ブルワリー</div>
+            <%= f.text_field :brewery, class:"edit-summary-text-field", id:"note-name", placeholder:"ブルワリー(醸造所)、販売元の名前", maxlength:"50" %>
+          </div>
+          <div>
+            <div class="edit-summary-title">ビアスタイル</div>
+            <%= f.text_field :beer_style, class:"edit-summary-text-field", id:"note-name", placeholder:"ビールの種類", maxlength:"50" %>
+          </div>
+          <div>
+            <div class="edit-summary-title">SRM</div>
+            <%= f.text_field :srm, class:"edit-summary-text-field", id:"note-name", placeholder:"Standard Reference Method(数値)", maxlength:"50" %>
+          </div>
+          <div>
+            <div class="edit-summary-title">IBU</div>
+            <%= f.text_field :ibu, class:"edit-summary-text-field", id:"note-name", placeholder:"International Bitterness Units(数値)", maxlength:"50" %>
+          </div>
+          <div>
+            <div class="edit-summary-title">ABV</div>
+            <%= f.text_field :abv, class:"edit-summary-text-field", id:"note-name", placeholder:"アルコール度数[%]", maxlength:"50" %>
+          </div>
+        </div>
+      </div>
 
       <%#####################################################
         # 外観
         ##################################################### %>
-      <div class="#" style="font-weight: bold">外観</div>
+      <div class="edit-block">
+        <div class="edit-title">外観</div>
 
-      <div class="#">透明度</div>
-      <div>
-        <% LooksClear.all.length.times do |index| %>
-          <% if index == 0 %>
-            <%= f.radio_button :looks_clear_id , LooksClear.data[index][:id], checked: true %>
-          <% else %>
-            <%= f.radio_button :looks_clear_id , LooksClear.data[index][:id] %>
-          <% end %>
-          <%= f.label :looks_clear_id , LooksClear.data[index][:name], value: LooksClear.data[index][:id] %>
-        <% end %>
+        <div>
+
+          <div class="#">透明度</div>
+          <div>
+            <% LooksClear.all.length.times do |index| %>
+              <%= f.label :looks_clear_id, value: LooksClear.data[index][:id] do %>
+                <%= LooksClear.data[index][:name] %>
+                <% if index == 0 %>
+                  <%= f.radio_button :looks_clear_id , LooksClear.data[index][:id], checked: true %>
+                <% else %>
+                  <%= f.radio_button :looks_clear_id , LooksClear.data[index][:id] %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div>
+            <%# LooksClear.all.length.times do |index| %>
+              <%# if index == 0 %>
+                <%#= f.radio_button :looks_clear_id , LooksClear.data[index][:id], checked: true %>
+              <%# else %>
+                <%#= f.radio_button :looks_clear_id , LooksClear.data[index][:id] %>
+              <%# end %>
+              <%#= f.label :looks_clear_id , LooksClear.data[index][:name], value: LooksClear.data[index][:id] %>
+            <%# end %>
+          </div>
+
+          <div class="#">色</div>
+          <div>
+            <% LooksColor.all.length.times do |index| %>
+              <% if index == 0 %>
+                <%= f.radio_button :looks_color_id , LooksColor.data[index][:id], checked: true %>
+              <% else %>
+                <%= f.radio_button :looks_color_id , LooksColor.data[index][:id] %>
+              <% end %>
+              <%= f.label :looks_color_id , LooksColor.data[index][:name], value: LooksColor.data[index][:id] %>
+            <% end %>
+          </div>
+
+          <div class="#">泡立ち</div>
+          <div>
+            <% LooksFoam.all.length.times do |index| %>
+              <% if index == 0 %>
+                <%= f.radio_button :looks_foam_id , LooksFoam.data[index][:id], checked: true %>
+              <% else %>
+                <%= f.radio_button :looks_foam_id , LooksFoam.data[index][:id] %>
+              <% end %>
+              <%= f.label :looks_foam_id , LooksFoam.data[index][:name], value: LooksFoam.data[index][:id] %>
+            <% end %>
+          </div>
+
+        </div>
       </div>
-
-      <div class="#">色</div>
-      <div>
-        <% LooksColor.all.length.times do |index| %>
-          <% if index == 0 %>
-            <%= f.radio_button :looks_color_id , LooksColor.data[index][:id], checked: true %>
-          <% else %>
-            <%= f.radio_button :looks_color_id , LooksColor.data[index][:id] %>
-          <% end %>
-          <%= f.label :looks_color_id , LooksColor.data[index][:name], value: LooksColor.data[index][:id] %>
-        <% end %>
-      </div>
-
-      <div class="#">泡立ち</div>
-      <div>
-        <% LooksFoam.all.length.times do |index| %>
-          <% if index == 0 %>
-            <%= f.radio_button :looks_foam_id , LooksFoam.data[index][:id], checked: true %>
-          <% else %>
-            <%= f.radio_button :looks_foam_id , LooksFoam.data[index][:id] %>
-          <% end %>
-          <%= f.label :looks_foam_id , LooksFoam.data[index][:name], value: LooksFoam.data[index][:id] %>
-        <% end %>
-      </div>
-
 
 
       <%#####################################################
@@ -223,8 +264,12 @@
       <%#####################################################
         # メモ
         ##################################################### %>
-      <div class="#">メモ(備考)</div>
-      <%= f.text_area :memo, class:"#", id:"note-memo", placeholder:"メモ（1,000文字まで）", rows:"7", maxlength:"1000" %>
+      <div class="edit-block">
+        <div class="edit-title">メモ(備考)</div>
+        <div class="edit-memo">
+          <%= f.text_area :memo, class:"edit-memo-form", id:"note-memo", placeholder:"メモ（1,000文字まで）", rows:"7", maxlength:"1000" %>
+        </div>
+      </div>
 
 
       <%#####################################################

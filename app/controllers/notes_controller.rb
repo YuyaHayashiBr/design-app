@@ -16,7 +16,6 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.new(note_params)
-    binding.pry
     if @note.save
       redirect_to notes_path
     else
@@ -40,6 +39,7 @@ class NotesController < ApplicationController
     params.require(:note).permit(
       :name,
       :brewery,
+      :beer_style,
       :srm,
       :ibu,
       :abv,
