@@ -5,20 +5,32 @@
 <div class="main">
   <div class="create">
 
-    <%= form_with model: @note, url: notes_path, local: true do |f| %>
+    <%= form_with model: @note, url: notes_path, id: "new_note", local: true do |f| %>
 
       <%# エラーメッセージ %>
       <%= render 'shared/error_messages', model: f.object %>
 
       <%# 画像(複数指定) %>
-      <div class="#">画像</div>
-      <div>
-        <%= f.label :images, '画像1' %>
-        <%= f.file_field :images, multiple: true %>
-        <%= f.label :images, '画像2' %>
-        <%= f.file_field :images, multiple: true %>
-        <%= f.label :images, '画像3' %>
-        <%= f.file_field :images, multiple: true %>
+      <div class="edit-block">
+        <div class="edit-title">ビールの写真(3枚まで)</div>
+        <div class="edit-img-forms">
+
+          <%# 画像選択フォーム %>
+          <% (1..3).each do |index| %>
+            <div class="edit-img-form">
+              <div class="edit-img-view" id="previews<%=index%>">
+                <%# TODO: フォームで選択した画像を表示 %>
+              </div>
+              <div class="edit-img-button">
+                <%= f.label :images, value: "#{index}", class: "edit-img-form-label" do %>
+                  <p>写真<%= index %></p>
+                  <%= f.file_field :images, multiple: true, class: "edit-img-form-file", id: "note_images_#{index}" %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
       </div>
 
       <div class="#">ビール名</div>
