@@ -511,13 +511,20 @@ ul.menu li.test:hover ul {
 
 .edit-summary {
   display: flex;
-  //justify-content: center;
   flex-direction: column;
   align-items: center;
 
   .edit-summary-title {
     font-size: 14px;
     font-weight: bold;
+
+    .essential {
+      background-color: red;
+      color: white;
+      border-radius: 3px;
+      padding: 1px 4px 1px 4px;
+      margin: 0px 0px 0px 3px;
+    }
   }
   .edit-summary-text-field {
     margin: 2px 10px 20px 10px;
@@ -529,7 +536,65 @@ ul.menu li.test:hover ul {
   }
 }
 
+.edit-sgmntd-ctrl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  .edit-sgmntd-ctrl-title {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+
+  .edit-sgmntd-ctrl-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px 10px 20px 10px;
+
+    :first-child .label {
+      border-radius: 10px 0 0 10px;
+    }
+    :last-child .label {
+      border-radius: 0 10px 10px 0;
+    }
+  }
+
+  .edit-sgmntd-ctrl-label {
+  }
+
+  .edit-sgmntd-ctrl-radio {
+    display: none;
+  }
+  .label {
+    height: 35px;
+    width: 150px;
+
+    background-color: black;
+    background-image: linear-gradient(to bottom, hsl(0,0%,98%) 0%,hsl(0,0%,77%) 100%);
+
+    border: 1px #AAAAAAAA;
+    border-style: solid none solid solid;
+
+    font-size: 14px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .edit-sgmntd-ctrl-radio:checked + .label {
+    color: $beer-foam-color;
+    font-weight: bold;
+    text-shadow: -1px -1px rgba(0,0,0,.3);
+   
+    background-color: $beer-body-color;
+    background-image: linear-gradient(to bottom, hsl(45,90%,50%) 0%, hsl(45,90%,80%) 100%);
+    border-color: hsl(45, 90%, 60%);
+    box-shadow: 3px 2px 10px rgba(255,173,0,.2) inset, -3px 2px 10px rgba(255,173,0,.2) inset; 
+  }
+
+}
 
 .edit-memo {
   display: flex;
@@ -542,6 +607,38 @@ ul.menu li.test:hover ul {
     border: solid black 0.8px;
     height: 200px;
     width: 700px;
+  }
+}
+
+.edit-registration {
+  width: 100%;
+  display:         flex;
+  justify-content: center;
+  align-items:     center;
+  margin: 10px 0px 0px 0px;
+  
+  input {
+    width: 150px;
+    height: 35px;
+    
+    border: none;//solid gray 0.5px;
+    border-radius:    35px;
+    background-color: $beer-body-color;
+    box-shadow:       0px 2px #FF8800;
+  
+    display:         flex;
+    justify-content: center;
+    align-items:     center;
+  
+    font-size:   14px;
+    font-weight: bold;
+    color:       gray;
+  
+    &:active {
+      position: relative;
+      top: 3px;
+      box-shadow: none;
+    }
   }
 }
 

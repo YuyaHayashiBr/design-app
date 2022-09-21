@@ -44,7 +44,7 @@
         <tr>
           <th class="table_item">ブルワリー</th>
           <td class="table_data">
-            <% if @note.brewery != nil%>
+            <% if @note.brewery != "" %>
               <%= @note.brewery %>
             <% else %>
               未登録
@@ -57,7 +57,7 @@
         <tr>
           <th class="table_item">ビアスタイル</th>
           <td class="table_data">
-            <% if @note.beer_style != nil%>
+            <% if @note.beer_style != "" %>
               <%= @note.beer_style %>
             <% else %>
               未登録
