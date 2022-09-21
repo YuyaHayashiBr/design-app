@@ -113,7 +113,7 @@
       # 編集/削除 ボタン
       ##################################################### %>
     <div class="detail_buttons">
-      <div class="detail_button"><%= link_to 'Edit', '#' %></div>
+      <div class="detail_button"><%= link_to 'Edit', edit_note_path(@note) %></div>
       <div class="detail_button"><%= link_to 'Delete', note_path(@note), method: :delete %></div>
     </div>
   </div>

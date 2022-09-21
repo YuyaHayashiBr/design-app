@@ -1,0 +1,338 @@
+<%# ヘッダー %>
+<%= render "shared/header" %>
+
+<%# メイン %>
+<div class="main">
+  <div class="title">思い出を修正する</div>
+
+  <div class="create">
+
+    <%= form_with model: @note, url: note_path, id: "new_note", method: :put, local: true do |f| %>
+
+      <%# エラーメッセージ %>
+      <%= render 'shared/error_messages', model: f.object %>
+
+      <%#####################################################
+        # 画像(複数指定)
+        ##################################################### %>
+      <div class="edit-block">
+        <div class="edit-title">写真(3枚まで)</div>
+        <div class="edit-img-forms">
+
+          <%# 画像選択フォーム %>
+          <% (1..3).each do |index| %>
+            <div class="edit-img-form">
+              <div class="edit-img-view" id="previews<%=index%>">
+                <%# TODO: フォームで選択した画像を表示 %>
+              </div>
+              <div class="edit-img-button">
+                <%= f.label :images, value: "#{index}", class: "edit-img-form-label" do %>
+                  <p>写真<%= index %></p>
+                  <%= f.file_field :images, multiple: true, class: "edit-img-form-file", id: "note_images_#{index}" %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+
+      <%#####################################################
+        # 概要
+        ##################################################### %>
+      <div class="edit-block">
+        <div class="edit-title">概要</div>
+        <div class="edit-summary">
+          <div>
+            <div class="edit-summary-title">ビール名<span class="essential">必須</span></div>
+            <%= f.text_field :name, class:"edit-summary-text-field", id:"note-name", placeholder:"ビールの銘柄、商品名など", maxlength:"50" %>
+          </div>
+          <div>
+            <div class="edit-summary-title">ブルワリー</div>
+            <%= f.text_field :brewery, class:"edit-summary-text-field", id:"note-name", placeholder:"ブルワリー(醸造所)、販売元の名前", maxlength:"50" %>
+          </div>
+          <div>
+            <div class="edit-summary-title">ビアスタイル</div>
+            <%= f.text_field :beer_style, class:"edit-summary-text-field", id:"note-name", placeholder:"ビールの種類", maxlength:"50" %>
+          </div>
+          <div>
+            <div class="edit-summary-title">SRM</div>
+            <%= f.text_field :srm, class:"edit-summary-text-field", id:"note-name", placeholder:"Standard Reference Method(数値)", maxlength:"50" %>
+          </div>
+          <div>
+            <div class="edit-summary-title">IBU</div>
+            <%= f.text_field :ibu, class:"edit-summary-text-field", id:"note-name", placeholder:"International Bitterness Units(数値)", maxlength:"50" %>
+          </div>
+          <div>
+            <div class="edit-summary-title">ABV</div>
+            <%= f.text_field :abv, class:"edit-summary-text-field", id:"note-name", placeholder:"アルコール度数[%]", maxlength:"50" %>
+          </div>
+        </div>
+      </div>
+
+      <%#####################################################
+        # 外観
+        ##################################################### %>
+      <div class="edit-block">
+        <div class="edit-title">外観</div>
+
+        <div class="edit-sgmntd-ctrl">
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">透明度</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% LooksClear.all.length.times do |index| %>
+                <%= f.label :looks_clear_id, class: "edit-sgmntd-ctrl-label", value: LooksClear.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :looks_clear_id, LooksClear.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :looks_clear_id, LooksClear.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= LooksClear.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">色</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% LooksColor.all.length.times do |index| %>
+                <%= f.label :looks_color_id, class: "edit-sgmntd-ctrl-label", value: LooksColor.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :looks_color_id, LooksColor.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :looks_color_id, LooksColor.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= LooksColor.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">泡立ち</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% LooksFoam.all.length.times do |index| %>
+                <%= f.label :looks_foam_id, class: "edit-sgmntd-ctrl-label", value: LooksFoam.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :looks_foam_id, LooksFoam.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :looks_foam_id, LooksFoam.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= LooksFoam.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <%#####################################################
+        # アロマ
+        ##################################################### %>
+      <div class="edit-block">
+        <div class="edit-title">アロマ</div>
+
+        <div class="edit-sgmntd-ctrl">
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">モルト</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% AromaMalt.all.length.times do |index| %>
+                <%= f.label :aroma_malt_id, class: "edit-sgmntd-ctrl-label", value: AromaMalt.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :aroma_malt_id, AromaMalt.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :aroma_malt_id, AromaMalt.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= AromaMalt.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">ホップ</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% AromaHop.all.length.times do |index| %>
+                <%= f.label :aroma_hop_id, class: "edit-sgmntd-ctrl-label", value: AromaHop.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :aroma_hop_id, AromaHop.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :aroma_hop_id, AromaHop.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= AromaHop.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">エステル</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% AromaEster.all.length.times do |index| %>
+                <%= f.label :aroma_ester_id, class: "edit-sgmntd-ctrl-label", value: AromaEster.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :aroma_ester_id, AromaEster.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :aroma_ester_id, AromaEster.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= AromaEster.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">フルーティー</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% AromaFruit.all.length.times do |index| %>
+                <%= f.label :aroma_fruit_id, class: "edit-sgmntd-ctrl-label", value: AromaFruit.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :aroma_fruit_id, AromaFruit.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :aroma_fruit_id, AromaFruit.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= AromaFruit.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">その他</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% AromaOther.all.length.times do |index| %>
+                <%= f.label :aroma_other_id, class: "edit-sgmntd-ctrl-label", value: AromaOther.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :aroma_other_id, AromaOther.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :aroma_other_id, AromaOther.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= AromaOther.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <%#####################################################
+        # フレーバー
+        ##################################################### %>
+      <div class="edit-block">
+        <div class="edit-title">フレーバー</div>
+
+        <div class="edit-sgmntd-ctrl">
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">ボディ</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% FlavorBody.all.length.times do |index| %>
+                <%= f.label :flavor_body_id, class: "edit-sgmntd-ctrl-label", value: FlavorBody.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :flavor_body_id, FlavorBody.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :flavor_body_id, FlavorBody.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= FlavorBody.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">カーボネーション</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% FlavorCarbonation.all.length.times do |index| %>
+                <%= f.label :flavor_carbonation_id, class: "edit-sgmntd-ctrl-label", value: FlavorCarbonation.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :flavor_carbonation_id, FlavorCarbonation.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :flavor_carbonation_id, FlavorCarbonation.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= FlavorCarbonation.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">モルトの甘み</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% FlavorMalt.all.length.times do |index| %>
+                <%= f.label :flavor_malt_id, class: "edit-sgmntd-ctrl-label", value: FlavorMalt.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :flavor_malt_id, FlavorMalt.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :flavor_malt_id, FlavorMalt.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= FlavorMalt.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">ホップの苦味</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% FlavorHop.all.length.times do |index| %>
+                <%= f.label :flavor_hop_id, class: "edit-sgmntd-ctrl-label", value: FlavorHop.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :flavor_hop_id, FlavorHop.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :flavor_hop_id, FlavorHop.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= FlavorHop.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div>
+            <div class="edit-sgmntd-ctrl-title">その他</div>
+            <div class="edit-sgmntd-ctrl-form">
+              <% FlavorOther.all.length.times do |index| %>
+                <%= f.label :flavor_other_id, class: "edit-sgmntd-ctrl-label", value: FlavorOther.data[index][:id] do %>
+                  <% if index == 0 %>
+                    <%= f.radio_button :flavor_other_id, FlavorOther.data[index][:id], class: "edit-sgmntd-ctrl-radio", checked: true %>
+                  <% else %>
+                    <%= f.radio_button :flavor_other_id, FlavorOther.data[index][:id], class: "edit-sgmntd-ctrl-radio" %>
+                  <% end %>
+                  <span class="label"><%= FlavorOther.data[index][:name] %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <%#####################################################
+        # メモ
+        ##################################################### %>
+      <div class="edit-block">
+        <div class="edit-title">メモ(備考)</div>
+        <div class="edit-memo">
+          <%= f.text_area :memo, class:"edit-memo-form", id:"note-memo", placeholder:"気になったことやコメントなど、なんでも記載してください。", rows:"7", maxlength:"1000" %>
+        </div>
+      </div>
+
+
+      <%#####################################################
+        # 登録ボタン
+        ##################################################### %>
+      <div class="edit-registration">
+        <%= f.submit "思い出を修正する", class:"#" %>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+
+<%# フッター %>
+<%= render "shared/footer" %>

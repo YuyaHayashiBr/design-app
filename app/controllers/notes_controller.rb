@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :show, :new, :create, :destroy]
-  before_action :get_note,           only: [:show, :destroy]
+  before_action :authenticate_user!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :get_note,           only: [:show, :edit, :update, :destroy]
 
   def index
     @notes = Note.where(user_id: current_user.id).order("created_at DESC")
@@ -20,6 +20,19 @@ class NotesController < ApplicationController
       redirect_to notes_path
     else
       render :new
+    end
+  end
+
+  def edit
+    # before_action :get_note
+  end
+
+  def update
+    # before_action :get_note
+    if @note.update(note_params)
+      redirect_to note_path(@note)
+    else
+      render :edit
     end
   end
 
