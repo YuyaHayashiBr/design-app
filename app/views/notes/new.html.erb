@@ -13,7 +13,11 @@
       <%# 画像(複数指定) %>
       <div class="#">画像</div>
       <div>
-        <%= f.label :images, '画像' %>
+        <%= f.label :images, '画像1' %>
+        <%= f.file_field :images, multiple: true %>
+        <%= f.label :images, '画像2' %>
+        <%= f.file_field :images, multiple: true %>
+        <%= f.label :images, '画像3' %>
         <%= f.file_field :images, multiple: true %>
       </div>
 
@@ -31,45 +35,189 @@
       <%= f.text_field :abv,     class:"#", id:"note-name", placeholder:"アルコール度数[%]", maxlength:"40" %>
 
 
+      <%#####################################################
+        # 外観
+        ##################################################### %>
       <div class="#" style="font-weight: bold">外観</div>
-      <div class="#">透明度</div>
-      <%= f.collection_select(:looks_clear_id, LooksClear.all, :id, :name, {}, {class:"#", id:"looks-clear"}) %>
-      <div class="#">色</div>
-      <%= f.collection_select(:looks_color_id, LooksColor.all, :id, :name, {}, {class:"#", id:"looks-color"}) %>
-      <div class="#">泡立ち</div>
-      <%= f.collection_select(:looks_foam_id,  LooksFoam.all,  :id, :name, {}, {class:"#", id:"looks-foam"}) %>
 
+      <div class="#">透明度</div>
+      <div>
+        <% LooksClear.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :looks_clear_id , LooksClear.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :looks_clear_id , LooksClear.data[index][:id] %>
+          <% end %>
+          <%= f.label :looks_clear_id , LooksClear.data[index][:name], value: LooksClear.data[index][:id] %>
+        <% end %>
+      </div>
+
+      <div class="#">色</div>
+      <div>
+        <% LooksColor.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :looks_color_id , LooksColor.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :looks_color_id , LooksColor.data[index][:id] %>
+          <% end %>
+          <%= f.label :looks_color_id , LooksColor.data[index][:name], value: LooksColor.data[index][:id] %>
+        <% end %>
+      </div>
+
+      <div class="#">泡立ち</div>
+      <div>
+        <% LooksFoam.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :looks_foam_id , LooksFoam.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :looks_foam_id , LooksFoam.data[index][:id] %>
+          <% end %>
+          <%= f.label :looks_foam_id , LooksFoam.data[index][:name], value: LooksFoam.data[index][:id] %>
+        <% end %>
+      </div>
+
+
+
+      <%#####################################################
+        # アロマ
+        ##################################################### %>
       <div class="#" style="font-weight: bold">アロマ</div>
       <div class="#">モルト</div>
-      <%= f.collection_select(:aroma_malt_id,  AromaMalt.all,  :id, :name, {}, {class:"#", id:"aroma-malt"}) %>
+      <div>
+        <% AromaMalt.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :aroma_malt_id , AromaMalt.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :aroma_malt_id , AromaMalt.data[index][:id] %>
+          <% end %>
+          <%= f.label :aroma_malt_id , AromaMalt.data[index][:name], value: AromaMalt.data[index][:id] %>
+        <% end %>
+      </div>
+
       <div class="#">ホップ</div>
-      <%= f.collection_select(:aroma_hop_id,   AromaHop.all,   :id, :name, {}, {class:"#", id:"aroma-hop"}) %>
+      <div>
+        <% AromaHop.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :aroma_hop_id , AromaHop.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :aroma_hop_id , AromaHop.data[index][:id] %>
+          <% end %>
+          <%= f.label :aroma_hop_id , AromaHop.data[index][:name], value: AromaHop.data[index][:id] %>
+        <% end %>
+      </div>
+
       <div class="#">エステル</div>
-      <%= f.collection_select(:aroma_ester_id, AromaEster.all, :id, :name, {}, {class:"#", id:"aroma-ester"}) %>
+      <div>
+        <% AromaEster.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :aroma_ester_id , AromaEster.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :aroma_ester_id , AromaEster.data[index][:id] %>
+          <% end %>
+          <%= f.label :aroma_ester_id , AromaEster.data[index][:name], value: AromaEster.data[index][:id] %>
+        <% end %>
+      </div>
+
       <div class="#">フルーティー</div>
-      <%= f.collection_select(:aroma_fruit_id, AromaFruit.all, :id, :name, {}, {class:"#", id:"aroma-fruit"}) %>
-      <div class="#">その他</div>
-      <%= f.collection_select(:aroma_other_id, AromaOther.all, :id, :name, {}, {class:"#", id:"aroma-other"}) %>
+      <div>
+        <% AromaFruit.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :aroma_fruit_id , AromaFruit.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :aroma_fruit_id , AromaFruit.data[index][:id] %>
+          <% end %>
+          <%= f.label :aroma_fruit_id , AromaFruit.data[index][:name], value: AromaFruit.data[index][:id] %>
+        <% end %>
+      </div>
 
+      <div class="#">その他</div>
+      <div>
+        <% AromaOther.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :aroma_other_id , AromaOther.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :aroma_other_id , AromaOther.data[index][:id] %>
+          <% end %>
+          <%= f.label :aroma_other_id , AromaOther.data[index][:name], value: AromaOther.data[index][:id] %>
+        <% end %>
+      </div>
+
+      <%#####################################################
+        # フレーバー
+        ##################################################### %>
       <div class="#" style="font-weight: bold">フレーバー</div>
-      <div class="#">ボディ</div>
-      <%= f.collection_select(:flavor_body_id, FlavorBody.all, :id, :name, {}, {class:"#", id:"flavor-body"}) %>
-      <div class="#">カーボネーション</div>
-      <%# Level.all %>
-      <%= f.collection_select(:flavor_carbonation_id,  FlavorCarbonation.all, :id, :name, {}, {class:"#", id:"flavor-carbonation"}) %>
-      <div class="#">モルトの甘み</div>
-      <%# Level.all %>
-      <%= f.collection_select(:flavor_malt_id,  FlavorMalt.all, :id, :name, {}, {class:"#", id:"flavor-malt"}) %>
-      <div class="#">ホップの苦味</div>
-      <%# Level.all %>
-      <%= f.collection_select(:flavor_hop_id,   FlavorHop.all, :id, :name, {}, {class:"#", id:"flavor-hop"}) %>
-      <div class="#">その他</div>
-      <%# Level.all %>
-      <%= f.collection_select(:flavor_other_id, FlavorOther.all, :id, :name, {}, {class:"#", id:"flavor-other"}) %>
 
+      <div class="#">ボディ</div>
+      <div>
+        <% FlavorBody.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :flavor_body_id , FlavorBody.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :flavor_body_id , FlavorBody.data[index][:id] %>
+          <% end %>
+          <%= f.label :flavor_body_id , FlavorBody.data[index][:name], value: FlavorBody.data[index][:id] %>
+        <% end %>
+      </div>
+
+      <div class="#">カーボネーション</div>
+      <div>
+        <% FlavorCarbonation.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :flavor_carbonation_id , FlavorCarbonation.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :flavor_carbonation_id , FlavorCarbonation.data[index][:id] %>
+          <% end %>
+          <%= f.label :flavor_carbonation_id , FlavorCarbonation.data[index][:name], value: FlavorCarbonation.data[index][:id] %>
+        <% end %>
+      </div>
+
+      <div class="#">モルトの甘み</div>
+      <div>
+        <% FlavorMalt.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :flavor_malt_id , FlavorMalt.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :flavor_malt_id , FlavorMalt.data[index][:id] %>
+          <% end %>
+          <%= f.label :flavor_malt_id , FlavorMalt.data[index][:name], value: FlavorMalt.data[index][:id] %>
+        <% end %>
+      </div>
+
+      <div class="#">ホップの苦味</div>
+      <div>
+        <% FlavorHop.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :flavor_hop_id , FlavorHop.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :flavor_hop_id , FlavorHop.data[index][:id] %>
+          <% end %>
+          <%= f.label :flavor_hop_id , FlavorHop.data[index][:name], value: FlavorHop.data[index][:id] %>
+        <% end %>
+      </div>
+
+      <div class="#">その他</div>
+      <div>
+        <% FlavorOther.all.length.times do |index| %>
+          <% if index == 0 %>
+            <%= f.radio_button :flavor_other_id , FlavorOther.data[index][:id], checked: true %>
+          <% else %>
+            <%= f.radio_button :flavor_other_id , FlavorOther.data[index][:id] %>
+          <% end %>
+          <%= f.label :flavor_other_id , FlavorOther.data[index][:name], value: FlavorOther.data[index][:id] %>
+        <% end %>
+      </div>
+
+
+      <%#####################################################
+        # メモ
+        ##################################################### %>
       <div class="#">メモ(備考)</div>
       <%= f.text_area :memo, class:"#", id:"note-memo", placeholder:"メモ（1,000文字まで）", rows:"7", maxlength:"1000" %>
 
+
+      <%#####################################################
+        # 登録ボタン
+        ##################################################### %>
       <%= f.submit "思い出に残す", class:"#" %>
     <% end %>
 

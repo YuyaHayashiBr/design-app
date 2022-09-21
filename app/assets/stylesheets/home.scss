@@ -241,7 +241,7 @@ ul.menu li.test:hover ul {
   margin: 20px 0px 0px 0px;
 
   display: flex;
-  justify-content: center;//space-between;
+  justify-content: space-between;
   align-items: center;
 }
 .thumbnail {
@@ -439,6 +439,16 @@ ul.menu li.test:hover ul {
 
   padding: 10px 10px 10px 10px;
   margin:  20px  0px 20px  0px;
+ }
+
+select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  option {
+    display: block;
+    background-color: gray;
+  }
  }
 
 
