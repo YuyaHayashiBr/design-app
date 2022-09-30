@@ -113,8 +113,8 @@
       # 編集/削除 ボタン
       ##################################################### %>
     <div class="detail_buttons">
-      <div class="detail_button"><%= link_to 'Edit', edit_note_path(@note) %></div>
-      <div class="detail_button"><%= link_to 'Delete', note_path(@note), method: :delete, data: {confirm: "削除しますか？"} %></div>
+      <div class="detail_button"><%= link_to '修正する', edit_note_path(@note) %></div>
+      <div class="detail_button"><%= link_to '忘れる', note_path(@note), method: :delete, data: {confirm: "削除しますか？"} %></div>
     </div>
   </div>
 
