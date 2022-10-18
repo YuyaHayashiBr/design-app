@@ -1,23 +1,5 @@
 # RememBEER (試作版)
 
-## URL
-
-https://remembeer-beta.herokuapp.com/
-
-```
-iPhone、Androidなどのスマートフォンには対応していません。
-お手数ですが、パソコンからお試しください。
-```
-
-
-## テスト用アカウント
-
-| Item     | Content         |
-| -------- | --------------- |
-| Nickname | テストユーザ      |
-| E-mail   | test@test.com   |
-| Password | aaa111          |
-
 ## 概要
 
 ビールのテイスティングノートを記録するアプリです。
@@ -33,6 +15,11 @@ iPhone、Androidなどのスマートフォンには対応していません。
 
 https://remembeer-beta.herokuapp.com/
 
+```
+iPhone、Androidなどのスマートフォンには対応していません。
+お手数ですが、パソコンからお試しください。
+```
+
 ### 2. 以下のような認証フォームが表示されるので、`Basic認証` のID、PWを入力する。
 
 <img width="300" src="./public/images/basic_auth_login.png">
@@ -41,9 +28,15 @@ https://remembeer-beta.herokuapp.com/
 
 <img width="500" src="./public/images/top_page.png">
 
-### 4. 以下のログインフォームが表示されるので、 `テスト用アカウント` の `E-mail` と `Password` を入力し、 `Log in` を押す。
+### 4. 以下のログインフォームが表示されるので、下記表の `テスト用アカウント` の `E-mail` と `Password` を入力し、 `Log in` を押す。
 
 <img width="200" src="./public/images/login_form.png">
+
+| Item     | Content         |
+| -------- | --------------- |
+| Nickname | テストユーザ      |
+| E-mail   | test@test.com   |
+| Password | aaa111          |
 
 ### 5. トップページの右上にユーザ名 (テストユーザ) が表示されていると、ログインができている。
 
@@ -96,15 +89,13 @@ https://docs.google.com/spreadsheets/d/1ZEAVOCXyXY613gTUO_9wlWCBVICAtAdW5C9Lqyum
 
 ## 動作確認状況
 
-* macOS
-  * Google Chrome
-  * Safari
-* Windows
-  * Edge
-* iOS
-  * 未確認
-* Android
-  * 未確認
+| OS      | Application   |
+| ------- | ------------- |
+| macOS   | Google Chrome |
+|         | Safari        |
+| Windows | Edge          |
+| iOS     | 未確認         |
+| Android | 未確認         |
 
 ## データベース設計
 
