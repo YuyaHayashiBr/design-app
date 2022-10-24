@@ -20,15 +20,11 @@ iPhone、Androidなどのスマートフォンには対応していません。
 お手数ですが、パソコンからお試しください。
 ```
 
-### 2. 以下のような認証フォームが表示されるので、`Basic認証` のID、PWを入力する。
-
-<img width="300" src="./public/images/basic_auth_login.png">
-
-### 3. 以下のトップページが表示されるので、ページ右上の `ログイン` を選択する。
+### 2. 以下のトップページが表示されるので、ページ右上の `ログイン` を選択する。
 
 <img width="500" src="./public/images/top_page.png">
 
-### 4. 以下のログインフォームが表示されるので、下記表の `テスト用アカウント` の `E-mail` と `Password` を入力し、 `Log in` を押す。
+### 3. 以下のログインフォームが表示されるので、下記表の `テスト用アカウント` の `E-mail` と `Password` を入力し、 `Log in` を押す。
 
 <img width="200" src="./public/images/login_form.png">
 
@@ -38,27 +34,27 @@ iPhone、Androidなどのスマートフォンには対応していません。
 | E-mail   | test@test.com   |
 | Password | aaa111          |
 
-### 5. トップページの右上にユーザ名 (テストユーザ) が表示されていると、ログインができている。
+### 4. トップページの右上にユーザ名 (テストユーザ) が表示されていると、ログインができている。
 
 <img width="500" src="./public/images/top_page_login.png">
 
-### 6. メニューから `思い出を残す` を選択する。
+### 5. メニューから `思い出を残す` を選択する。
 
 <img width="200" src="./public/images/new_path.png">
 
-### 7. 各項目を入力し、 `思い出に残す` ボタンを押す。
+### 6. 各項目を入力し、 `思い出に残す` ボタンを押す。
 
 <img width="500" src="./public/images/post_path.png">
 
-### 8. 登録したテイスティングノートが一覧表示される。
+### 7. 登録したテイスティングノートが一覧表示される。
 
 <img width="500" src="./public/images/index_path.png">
 
-### 9. 一覧表示からビールを選択すると詳細表示される。
+### 8. 一覧表示からビールを選択すると詳細表示される。
 
 <img width="500" src="./public/images/show_path.png">
 
-### 10. 詳細表示のページ下部に編集用 `思い出を修正する` ボタンと、削除用の `忘れる` ボタンがあるので、必要に応じて使用する。
+### 9. 詳細表示のページ下部に編集用 `思い出を修正する` ボタンと、削除用の `忘れる` ボタンがあるので、必要に応じて使用する。
 
 <img width="300" src="./public/images/edit_destroy_path.png">
 
